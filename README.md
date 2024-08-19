@@ -11,16 +11,16 @@ This project we undertake a data engineering task in conjuction with software en
 
 ### Project overview
 
-* Data Collection
+* Data Collection -
 Through the API we shall select specific informationneeded for the project.
 
-* Data Storage
+* Data Storage -
 After data collection, using the database created for this projects, we chose Postgres to store our data.
 
-* Automation
+* Automation - 
 Using Airflow a daily task will be scheduled to pull the data from the API and store it in the Database.
 
-* Data Presentation 
+* Data Presentation -
 From the API built by us, in a table format this information will be displayed on a website
 
 ## Technologies
