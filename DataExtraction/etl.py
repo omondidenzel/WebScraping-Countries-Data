@@ -21,6 +21,7 @@ def get_data():
 
         data_dict['Country'] = soup.css.select('.fn.org.country-name')[0].get_text()
         data_dict['Latitude'] = soup.css.select('.latitude')[0].get_text()
+        data_dict['Longitude'] = soup.css.select('.longitude')[0].get_text()
         # data_dict['National_Language'] = soup.css.select('.infobox-data')[0].get_text()
 
         data_list.append(data_dict)
@@ -33,3 +34,4 @@ def get_data():
 
     print(df.head())
 
+get_data()
