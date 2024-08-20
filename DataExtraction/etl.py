@@ -22,14 +22,31 @@ def get_data():
         data_dict['Country'] = soup.css.select('.fn.org.country-name')[0].get_text()
         data_dict['Latitude'] = soup.css.select('.latitude')[0].get_text()
         data_dict['Longitude'] = soup.css.select('.longitude')[0].get_text()
-        # data_dict['National_Language'] = soup.css.select('.infobox-data')[0].get_text()
+
+        find_td_element = soup.find('td', class_='infobox-data')
+        data_dict['Capital'] = find_td_element.find('a').text
+
+        # data_dict['Populatiom_Estimate'] = soup.fin()
+        # data_dict['GDP'] = 
 
         data_list.append(data_dict)
         
         # create empty DataFrame 
         df = pd.DataFrame(data_list)
 
+        # Transformation
+        def removeSymbolsNumber(data_symbol):
+            data_symbol = re.sub(r'\[\d+\]', '', data_symbol)
+            return data_symbol 
+        
+        def removeNumericalValue(data_numerical):
+            data_numerical = re.sub('[^A-Za-z]+', ' ', data_numerical)
+            return data_numerical 
+        
         df.columns = df.columns.str.lower()
+        df['country'] = df['country'].apply(removeSymbolsNumber)
+        df['capital'] = df['capital'].apply(removeNumericalValue)
+        
 
 
     print(df.head())
