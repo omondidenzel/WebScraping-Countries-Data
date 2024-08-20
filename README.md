@@ -4,7 +4,7 @@
 * [Introduction](#Introduction)
 * [Technologies](#technologies)
 * [Setup](#setup)
-* [Refences](#references)
+* [References](#references)
 
 ## Introduction
 This project we undertake a data engineering task in conjuction with software engineering to full automate data collaction and data storage process.
