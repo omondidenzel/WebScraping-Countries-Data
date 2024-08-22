@@ -37,8 +37,12 @@ def get_data():
             find_td_element = soup.find('td', class_='infobox-data')
             data_dict['Capital'] = find_td_element.find('a').text
 
-            # data_dict['Populatiom_Estimate'] = soup.fin()
-            # data_dict['GDP'] = 
+            rows = soup.find_all('tr')
+            populatiom_estimate = rows[32].find_all('td', class_='infobox-data')
+            # gdp_estimate = rows[36].find_all('td', class_='infobox-data')
+
+            for x in populatiom_estimate:
+                data_dict['populatiom_estimate'] = x.text
 
             data_list.append(data_dict)
             
@@ -57,9 +61,18 @@ def get_data():
             df.columns = df.columns.str.lower()
             df['country'] = df['country'].apply(removeSymbolsNumber)
             df['capital'] = df['capital'].apply(removeNumericalValue)
+
+    print(df.head(20))
+
+    # Load to DB
+    log.info(f'Load to database')
+    try:
+        with config.engine.connect() as conn:
+            df.to_sql('country_record', con=conn, if_exists='replace', index=False)
             
-
-
-    print(df.head())
-
+            conn.close()
+            log.info('DB onnection closed')
+    except Exception as e:
+        log.info(f'Error -> '.format(e))
+            
 get_data()
