@@ -62,16 +62,18 @@ def get_data():
             df['country'] = df['country'].apply(removeSymbolsNumber)
             df['capital'] = df['capital'].apply(removeNumericalValue)
 
-    print(df.head(20))
+    # print(df.head(20))
 
     # Load to DB
-    log.info(f'Load to database')
+    log.info(f'Load data to database')
     try:
         with config.engine.connect() as conn:
             df.to_sql('country_record', con=conn, if_exists='replace', index=False)
+            log.info(f'Data loaded to database ->> ({df.shape[0]} rows and {df.shape[1]} columns; {list(df.columns)}).')
             
+            log.info('Attempting to close DB connection')
             conn.close()
-            log.info('DB onnection closed')
+            log.info('DB connection closed')
     except Exception as e:
         log.info(f'Error -> '.format(e))
             
