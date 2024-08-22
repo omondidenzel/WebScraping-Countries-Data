@@ -62,7 +62,7 @@ def get_data():
             df['country'] = df['country'].apply(removeSymbolsNumber)
             df['capital'] = df['capital'].apply(removeNumericalValue)
 
-    print(df.head(20))
+    # print(df.head(20))
 
     # Load to DB
     log.info(f'Load to database')
