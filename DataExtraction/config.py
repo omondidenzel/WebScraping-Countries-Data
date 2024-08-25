@@ -17,7 +17,7 @@ list_of_countries =  {
 }
 
 def save_toDB():
-    URL_DATABASE = 'postgresql://postgres:{}@localhost:5450/{}'.format(db_password, db_name)
+    URL_DATABASE = 'postgresql://denzel_admin:{}@futurekwany.cbeyew4isf50.us-east-1.rds.amazonaws.com:5432/{}'.format(db_password, db_name)
     return create_engine(URL_DATABASE)
 
 engine = save_toDB() 

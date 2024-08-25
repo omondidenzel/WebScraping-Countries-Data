@@ -75,6 +75,6 @@ def get_data():
             conn.close()
             log.info('DB connection closed')
     except Exception as e:
-        log.info(f'Error -> '.format(e))
+        log.info('Error -> {}'.format(e))
             
 get_data()
