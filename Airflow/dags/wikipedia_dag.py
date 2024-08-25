@@ -1,8 +1,9 @@
 from airflow import DAG 
-from airflow.operators.dummy import DummyOperator
-from airflow.operators.bash import BashOperator
+from airflow.operators.empty import EmptyOperator
+from airflow.operators.python import PythonOperator
 import datetime
 import pendulum
+import etl
 
 default_param = {
     "ownner":"dev_denzel",
@@ -11,17 +12,18 @@ default_param = {
     "catchup":False
 }
 
+
 with DAG('wikipedia_extraction', default_args=default_param) as dag:
-    start = DummyOperator(
+    start = EmptyOperator(
         task_id = 'start'
     )
 
-    extract = BashOperator(
+    extract = PythonOperator(
         task_id = 'extraction',
-        bash_command='echo "Working" '
+        python_callable= etl.get_data
     )
 
-    end = DummyOperator(
+    end = EmptyOperator(
         task_id = 'end'
     )
 

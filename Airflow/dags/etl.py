@@ -37,12 +37,12 @@ def get_data():
             find_td_element = soup.find('td', class_='infobox-data')
             data_dict['Capital'] = find_td_element.find('a').text
 
-            rows = soup.find_all('tr')
-            populatiom_estimate = rows[32].find_all('td', class_='infobox-data')
+            # rows = soup.find_all('tr')
+            # populatiom_estimate = rows[32].find_all('td', class_='infobox-data')
             # gdp_estimate = rows[36].find_all('td', class_='infobox-data')
 
-            for x in populatiom_estimate:
-                data_dict['populatiom_estimate'] = x.text
+            # for x in populatiom_estimate:
+                # data_dict['populatiom_estimate'] = x.text
 
             data_list.append(data_dict)
             
@@ -74,7 +74,8 @@ def get_data():
             log.info('Attempting to close DB connection')
             conn.close()
             log.info('DB connection closed')
+
     except Exception as e:
-        log.info('Error -> {}'.format(e))
+        log.info(f'Error -> '.format(e))
             
 get_data()
